@@ -5,7 +5,7 @@ import HamburgerButton from './HamburgerButton.vue';
 <template>
     <nav id="nav-container">
         <div id="logo">
-            <a href="">SpaceWiki</a>
+            <a href="/">SpaceWiki</a>
         </div>
         <div id="links-container">
             <a href="#">Databank</a>

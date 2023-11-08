@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+
     const props = defineProps({
         title: {
             type: String,
@@ -8,12 +10,24 @@
         imgUrl: {
             type: String,
             required: true,
+        },
+        routePath: {
+            type: String,
+            required: true,
+            default: '#'
         }
     })
+
+    const router = useRouter()
+
+    const handleSectionChoose = () => {
+        console.log("123")
+        router.push('/'+props.routePath)
+    }
 </script>
 
 <template>
-    <div class="section-box">
+    <div class="section-box" @click="handleSectionChoose">
         <h2>{{ props.title }}</h2>
         <img v-bind:src="props.imgUrl" class="section-img" :alt="props.title" />
     </div>
