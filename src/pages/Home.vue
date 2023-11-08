@@ -4,9 +4,9 @@ import SectionBox from '../components/HomePage/SectionBox.vue';
 
 const sections = [
     {
-        title: 'Solar system', imgUrl: 'images/solarSystem.jpg'
+        title: 'Solar system', imgUrl: 'images/solarSystem.jpg', route: "solar-system"
     },{
-        title: 'Galaxies', imgUrl: '/images/galaxy.jpg'
+        title: 'Galaxies', imgUrl: '/images/galaxy.jpg', route: "galaxies"
 }]
 </script>
 
@@ -15,7 +15,7 @@ const sections = [
         <navbar></navbar>
         <main>
             <div id="section-container">
-               <section-box v-for="s in sections" v-bind:title="s.title" v-bind:imgUrl="s.imgUrl"></section-box> 
+               <section-box v-for="s in sections" v-bind:title="s.title" v-bind:imgUrl="s.imgUrl" :routePath="s.route"></section-box> 
             </div>
         </main>
     </div>
