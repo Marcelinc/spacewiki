@@ -13,6 +13,8 @@
 #loading-container{
     width: 100vw;
     height: 100vh;
+    min-height: 300px;
+    min-width: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
