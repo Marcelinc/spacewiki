@@ -36,7 +36,7 @@ fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star
 .finally(() => {
     setTimeout(() => {
         loading.value = false;
-    }, 3000)
+    }, 1000)
 })
 
 </script>
