@@ -7,14 +7,15 @@ import { ref } from 'vue';
 type CelestialType = {
     name: string,
     englishName: string,
-    id: string
+    id: string,
+    bodyType: string
 }
 
 var loading = ref(true);
 var error= ref(false);
 var objects = ref<CelestialType[]>([]);
 
-fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star&filter[]=bodyType,eq,Planet&satisfy=true&satisfy=any&order=aphelion,asc&data=id,name,englishName',{
+fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star&filter[]=bodyType,eq,Planet&filter[]=bodyType,eq,Dwarf Planet&satisfy=true&satisfy=any&order=aphelion,asc&data=id,name,englishName,bodyType',{
     headers: {
         'Content-Type': 'application/json',
     }
@@ -48,14 +49,36 @@ fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star
         <navbar></navbar>
         <main>
             <h1>Solar System</h1>
-            <div class="planet-container">
-                <div class="planet" v-for="obj in objects" :key="obj.name">
-                    <router-link :to="'/solar-system/'+obj.id">
-                        <img :src="'/images/'+obj.englishName.toLowerCase()+'.png'" :alt="obj.englishName"/>
-                        <span class="obj-name">{{ obj.englishName }}</span>
-                    </router-link>
+            <p>
+                Planetary system that centers around the 
+                <router-link to="/solar-system/soleil" id="sun">Sun</router-link>.
+            </p>
+            <p>It consists of eight planets, their moons, dwarf planets, asteroids, comets and other celestial bodies</p>
+            <section>
+                <h2>Planets</h2>
+                <div class="planet-container">
+                    <div class="planet" v-for="obj in objects" :key="obj.name">
+                        <router-link :to="'/solar-system/'+obj.id" v-if="obj.bodyType === 'Planet'">
+                            <img :src="'/images/'+obj.englishName.toLowerCase()+'.png'" :alt="obj.englishName"/>
+                            <span class="obj-name">{{ obj.englishName }}</span>
+                        </router-link>
+                    </div>
                 </div>
-        </div>
+            </section>
+            <section>
+                <h2>Dwarf planets</h2>
+                <div class="planet-container">
+                    <div class="planet" v-for="obj in objects" :key="obj.name">
+                        <router-link :to="'/solar-system/'+obj.id" v-if="obj.bodyType === 'Dwarf Planet'">
+                            <img :src="'/images/'+obj.englishName.toLowerCase()+'.png'" :alt="obj.englishName"/>
+                            <span class="obj-name">{{ obj.englishName }}</span>
+                        </router-link>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Asteroid belts</h2>
+            </section>
         </main>
     </div>
 </template>
@@ -76,11 +99,14 @@ img{
     aspect-ratio: 3/3;
     object-fit: contain;
 }
+section{
+    margin-top: 4em;
+}
 
 .planet-container{
     display: flex;
     justify-content: center;
-    padding: 5em;
+    padding: 1em 5em;
 }
 .planet a{
     display: flex;
@@ -100,6 +126,10 @@ img{
 }
 .obj-name{
     opacity: 0;
+}
+
+#sun{
+    color: rgb(194, 135, 25);
 }
 
 @keyframes mover{
