@@ -26,6 +26,9 @@ import HamburgerButton from './HamburgerButton.vue';
 a{
     margin: 1.2em;
 }
+#logo{
+    color: aqua;
+}
 
 @media screen and (max-width: 540px){
     #links-container{
