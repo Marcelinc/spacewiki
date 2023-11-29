@@ -49,11 +49,11 @@ fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star
         <navbar></navbar>
         <main>
             <h1>Solar System</h1>
-            <p>
+            <p class="solar-desc">
                 Planetary system that centers around the 
                 <router-link to="/solar-system/soleil" id="sun">Sun</router-link>.
             </p>
-            <p>It consists of eight planets, their moons, dwarf planets, asteroids, comets and other celestial bodies</p>
+            <p class="solar-desc">It consists of eight planets, their moons, dwarf planets, asteroids, comets and other celestial bodies</p>
             <section>
                 <h2>Planets</h2>
                 <div class="planet-container">
@@ -67,6 +67,9 @@ fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star
             </section>
             <section>
                 <h2>Dwarf planets</h2>
+                <p>
+                    Unique category of celestial bodies that share characteristics with both planets and asteroids. They are distinct from regular planets due to their inability to clear their orbits and their smaller size. Despite not meeting all the criteria to be considered planets, dwarf planets play a crucial role in understanding the diversity of our solar system.
+                </p>
                 <div class="planet-container">
                     <div class="planet" v-for="obj in objects" :key="obj.name">
                         <router-link :to="'/solar-system/'+obj.id" v-if="obj.bodyType === 'Dwarf Planet'">
@@ -89,10 +92,15 @@ main{
     min-height: 400px;
     max-height: min-content;
     text-align: center;
+    max-width: 1000px;
+    margin: auto;
 }
 h1{
     margin-top: 2em;;
     animation: mover 1.5s ease-in;
+}
+h2{
+    animation: mover 2.5s ease-in;
 }
 img{
     width: 50px;
@@ -101,6 +109,10 @@ img{
 }
 section{
     margin-top: 4em;
+}
+
+.solar-desc{
+    animation: opacityMover 2s ease-in;
 }
 
 .planet-container{
@@ -114,7 +126,7 @@ section{
     align-items: center;
     margin: 1.2em;
     transition: scale .8s ease-in;
-    animation: planetMover 4.5s ease-in;
+    animation: opacityMover 5.5s ease-in;
 }
 .planet:hover a{
     cursor: pointer;
@@ -136,7 +148,7 @@ section{
     0% { opacity: 0;  translate: -30px;}
     100% { opacity: 1; translate: 0px;}
 }
-@keyframes planetMover{
+@keyframes opacityMover{
     0% {opacity: 0;}
     100% {opacity: 1;}
 }
