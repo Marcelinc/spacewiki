@@ -2,7 +2,8 @@
 import Navbar from '../components/Navbar.vue';
 import Loading from '../components/Loading.vue';
 import Error from '../components/Error.vue';
-import { ref } from 'vue';
+import { ref, Transition } from 'vue';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid';
 
 type CelestialType = {
     name: string,
@@ -14,6 +15,10 @@ type CelestialType = {
 var loading = ref(true);
 var error= ref(false);
 var objects = ref<CelestialType[]>([]);
+
+const showOrbClearance = ref(false);
+const showSize = ref(false);
+const showShape = ref(false);
 
 fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star&filter[]=bodyType,eq,Planet&filter[]=bodyType,eq,Dwarf Planet&satisfy=true&satisfy=any&order=aphelion,asc&data=id,name,englishName,bodyType',{
     headers: {
@@ -49,11 +54,14 @@ fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star
         <navbar></navbar>
         <main>
             <h1>Solar System</h1>
+            
             <p class="solar-desc">
                 Planetary system that centers around the 
                 <router-link to="/solar-system/soleil" id="sun">Sun</router-link>.
             </p>
             <p class="solar-desc">It consists of eight planets, their moons, dwarf planets, asteroids, comets and other celestial bodies</p>
+            <img src="/images/solarSystem.gif" id="solarGif"/>
+            <p class="solar-desc">Unlike the commonly used model of the solar system, it actually looks different. Its movement through space in the form of a 3D model resembles a vortex.</p>
             <section>
                 <h2>Planets</h2>
                 <div class="planet-container">
@@ -65,10 +73,48 @@ fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star
                     </div>
                 </div>
             </section>
+
             <section>
                 <h2>Dwarf planets</h2>
                 <p>
                     Unique category of celestial bodies that share characteristics with both planets and asteroids. They are distinct from regular planets due to their inability to clear their orbits and their smaller size. Despite not meeting all the criteria to be considered planets, dwarf planets play a crucial role in understanding the diversity of our solar system.
+                </p>
+                <h4 id="characteristics-title">Characteristics of Dwarf Planets</h4>
+                <p>
+                    <span class="characteristic-name" id="orbClearanceBttn" @click="showOrbClearance = !showOrbClearance">
+                        Orbital Clearance 
+                        <chevron-down-icon v-show="!showOrbClearance"/>
+                        <chevron-up-icon v-show="showOrbClearance"/>
+                    </span>
+                    <Transition>
+                        <div class="characteristic-desc" v-show="showOrbClearance">
+                            Unlike planets, dwarf planets do not have the ability to clear    their orbits of other objects. Their orbits may intersect with those of other celestial bodies.
+                        </div>
+                    </Transition>
+                </p>
+                <p>
+                    <span class="characteristic-name" id="sizeBttn" @click="showSize = !showSize">
+                        Size 
+                        <chevron-down-icon v-show="!showSize"/>
+                        <chevron-up-icon v-show="showSize"/>
+                    </span>
+                    <Transition>
+                        <div class="characteristic-desc" v-show="showSize">
+                            Dwarf planets are significantly smaller than regular planets. Their smaller size prevents them from achieving gravitational dominance in their orbital regions.
+                        </div>
+                    </Transition>
+                </p>
+                <p>
+                    <span class="characteristic-name" id="shapeBttn" @click="showShape = !showShape">
+                        Spherical Shape 
+                        <chevron-down-icon v-show="!showShape"/>
+                        <chevron-up-icon v-show="showShape"/>
+                    </span>
+                    <Transition>
+                        <div class="characteristic-desc" v-show="showShape">
+                            Similar to planets, dwarf planets have a spherical shape. This distinguishes them from most asteroids and other irregularly shaped objects.
+                        </div>
+                    </Transition>
                 </p>
                 <div class="planet-container">
                     <div class="planet" v-for="obj in objects" :key="obj.name">
@@ -79,9 +125,10 @@ fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star
                     </div>
                 </div>
             </section>
-            <section>
+
+            <!--<section>
                 <h2>Asteroid belts</h2>
-            </section>
+            </section>-->
         </main>
     </div>
 </template>
@@ -110,7 +157,10 @@ img{
 section{
     margin-top: 4em;
 }
-
+#solarGif{
+    width: 20vw;
+    min-width: 200px;
+}
 .solar-desc{
     animation: opacityMover 2s ease-in;
 }
@@ -143,7 +193,36 @@ section{
 #sun{
     color: rgb(194, 135, 25);
 }
+.characteristic-name{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: yellowgreen;
+}
+.characteristic-name svg{
+    width: 5%;
+    min-width: 25px;
+}
+.characteristic-name:hover{
+    cursor: pointer;
+    opacity: .8;
+}
+#characteristics-title{
+    margin-top: 15px;
+}
 
+/**Transitions */
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 1.5s ease;
+}
+
+/*animations*/
 @keyframes mover{
     0% { opacity: 0;  translate: -30px;}
     100% { opacity: 1; translate: 0px;}
@@ -153,6 +232,7 @@ section{
     100% {opacity: 1;}
 }
 
+/**Media queries */
 @media screen and (max-width:849px){
     .planet-container{
         flex-direction: column;
