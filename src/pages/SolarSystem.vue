@@ -160,6 +160,7 @@ section{
 #solarGif{
     width: 20vw;
     min-width: 200px;
+    animation: opacityMover 2.5s ease-in;
 }
 .solar-desc{
     animation: opacityMover 2s ease-in;
