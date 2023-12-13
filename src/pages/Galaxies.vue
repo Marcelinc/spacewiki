@@ -59,45 +59,52 @@ const GalaxyTypes = [{
         <navbar></navbar>
         <main>
             <section id="about">
-                <h1>Welcome to the Galaxy Explorer</h1>
-                <span>Embark on a cosmic journey with us as we delve into the fascinating world of galaxies</span>
-                <div class="about-content right">
-                    <span>
-                        <h3>What are galaxies?</h3>
-                        Galaxies are colossal systems of stars, interstellar gas, dust, and dark matter bound together by gravity. Our universe is teeming with these celestial giants, each telling a unique story of cosmic evolution.
-                    </span>
-                </div>
-                <div class="about-content left">
-                    <span>
-                        <h3>Explore the Cosmos</h3>
-                        Discover the diverse array of galaxies that populate our vast universe. From spiral galaxies like the Milky Way to elliptical galaxies with their graceful shapes, each holds its own secrets waiting to be unraveled. Learn about the various classifications, sizes, and distinctive features that make each galaxy a celestial masterpiece.
-                    </span>
+                <div id="about-content">
+                    <h1>Welcome to the Galaxy Explorer</h1>
+                    <span>Embark on a cosmic journey with us as we delve into the fascinating world of galaxies</span>
+                    <div class="about-content right">
+                        <span>
+                            <h3>What are galaxies?</h3>
+                            Galaxies are colossal systems of stars, interstellar gas, dust, and dark matter bound together by gravity. Our universe is teeming with these celestial giants, each telling a unique story of cosmic evolution.
+                        </span>
+                    </div>
+                    <div class="about-content left">
+                        <span>
+                            <h3>Explore the Cosmos</h3>
+                            Discover the diverse array of galaxies that populate our vast universe. From spiral galaxies like the Milky Way to elliptical galaxies with their graceful shapes, each holds its own secrets waiting to be unraveled. Learn about the various classifications, sizes, and distinctive features that make each galaxy a celestial masterpiece.
+                        </span>
+                    </div>
                 </div>
             </section>
             
 
             <section id="types">
-                <h1>Types of galaxies</h1>
-                <div>
-                    <span>
-                        Galaxies, the building blocks of our vast universe, come in a variety of shapes and sizes. Each type of galaxy offers a unique glimpse into the cosmic tapestry. Let's embark on a journey through the different classifications of galaxies
-                    </span>
-                </div>
-                <div v-for="x in GalaxyTypes" class="type-content">
-                    <h3>{{ x.typeName }}</h3>
-                    <figure>
-                        <img :src="x.example.image" :alt="x.example.objectName"/>
-                        <figcaption>{{ x.example.objectName }}</figcaption>
-                    </figure>
-                    <span>{{ x.description }}</span>
+                <div id="types-content">
+                    <h1>Types of galaxies</h1>
+                    <div>
+                        <span>
+                            Galaxies, the building blocks of our vast universe, come in a variety of shapes and sizes. Each type of galaxy offers a unique glimpse into the cosmic tapestry. Let's embark on a journey through the different classifications of galaxies
+                        </span>
+                    </div>
+                    <div v-for="x in GalaxyTypes" class="type-content">
+                        <h3>{{ x.typeName }}</h3>
+                        <span class="type-description">{{ x.description }}</span>
+                        <figure>
+                            <img :src="x.example.image" :alt="x.example.objectName"/>
+                            <figcaption>{{ x.example.objectName }}</figcaption>
+                        </figure>
+                        
+                    </div>
                 </div>
             </section>
             <section id="observations">
-                <h1>Beyond the Visible</h1>
-                <div>
-                    <span>
-                        Peer into the unseen realms of the electromagnetic spectrum to unveil the hidden beauty of galaxies. Infrared, radio, and X-ray observations reveal a universe brimming with activity and phenomena that our eyes alone cannot perceive.
-                    </span>
+                <div id="observations-content">
+                    <h1>Beyond the Visible</h1>
+                    <div>
+                        <span>
+                            Peer into the unseen realms of the electromagnetic spectrum to unveil the hidden beauty of galaxies. Infrared, radio, and X-ray observations reveal a universe brimming with activity and phenomena that our eyes alone cannot perceive.
+                        </span>
+                    </div>
                 </div>
             </section>
         </main>
@@ -110,8 +117,6 @@ main{
     min-height: 400px;
     max-height: min-content;
     text-align: center;
-    margin: auto;
-    max-width: 1100px;
 }
 h1{
     margin-top: 2em;
@@ -144,7 +149,15 @@ figure img{
     width: 40%;
 }
 #types{
-    margin-inline: 30px;
+    background-image: linear-gradient(rgb(19, 16, 16),10%,rgb(20, 20, 44),98%,rgb(37, 18, 18));
+    padding-block: 40px;
+}
+#observations{
+    background-image: linear-gradient(rgb(37, 18, 18),20%, rgb(19, 16, 16));
+}
+#types-content,#about-content,#observations-content{
+    margin: auto;
+    max-width: 1100px;
 }
 .type-content{
     display: flex;
@@ -155,6 +168,9 @@ figure img{
 .type-content h3{
     margin-top: 1em;
     font-size: xx-large;
+}
+.type-description{
+    max-width: 900px;
 }
 #observations{
     padding: 2em;
