@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type imageType = {
+/*type imageType = {
     id: number,
     path: string,
 }
@@ -15,7 +15,7 @@ class Carousel{
     constructor(container,items,controls){
         this.carousel
     }
-}
+}*/
 </script>
 
 <template>
