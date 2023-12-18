@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Navbar from '../components/Navbar.vue';
+import Slider from '../components/GalaxiesPage/Slider.vue';
 
 const GalaxyTypes = [{
     id:1,
@@ -102,8 +103,9 @@ const GalaxyTypes = [{
                     <h1>Beyond the Visible</h1>
                     <div>
                         <span>
-                            Peer into the unseen realms of the electromagnetic spectrum to unveil the hidden beauty of galaxies. Infrared, radio, and X-ray observations reveal a universe brimming with activity and phenomena that our eyes alone cannot perceive.
+                            Peer into the unseen realms of the electromagnetic spectrum to unveil the hidden beauty of galaxies. Infrared, radio, and X-ray observations reveal a universe brimming with activity and phenomena that our eyes alone cannot perceive. Take a look at the breathtaking photos we have selected.
                         </span>
+                        <slider></slider>
                     </div>
                 </div>
             </section>
