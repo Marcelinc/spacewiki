@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
 type imageType = {
     id: number,
     path: string,
@@ -7,6 +7,15 @@ type imageType = {
 const images = [];
 
 const galleryContainer = document.querySelector('.gallery-container');
+const galleryControlsContainer = document.querySelector('.gallery-controls');
+const galleryControls = ['previous', 'next'];
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+class Carousel{
+    constructor(container,items,controls){
+        this.carousel
+    }
+}
 </script>
 
 <template>
