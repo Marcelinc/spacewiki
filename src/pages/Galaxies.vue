@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Navbar from '../components/Navbar.vue';
-import Slider from '../components/GalaxiesPage/Slider.vue';
+
 
 const GalaxyTypes = [{
     id:1,
