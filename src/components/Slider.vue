@@ -1,21 +1,92 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
+
 /*type imageType = {
     id: number,
     path: string,
 }
 
 const images = [];
-
-const galleryContainer = document.querySelector('.gallery-container');
-const galleryControlsContainer = document.querySelector('.gallery-controls');
-const galleryControls = ['previous', 'next'];
-const galleryItems = document.querySelectorAll('.gallery-item');
+*/
+var galleryContainer: HTMLElement | null;
+var galleryControlsContainer: HTMLElement | null;
+const galleryControls: Array<String> = ['previous', 'next'];
+var galleryItems: NodeListOf<HTMLElement> | null;
+var galaxyCarousel: Carousel;
 
 class Carousel{
-    constructor(container,items,controls){
-        this.carousel
+
+    carouselContainer: HTMLElement;
+    carouselControls: Array<String>;
+    carouselArray: Array<HTMLElement>;
+
+    constructor(container: HTMLElement,items: NodeListOf<HTMLElement>,controls: Array<String>){
+        this.carouselContainer = container;
+        this.carouselControls = controls;
+        this.carouselArray = [...items];
     }
-}*/
+
+    updateGallery(){
+        this.carouselArray.forEach(el => {
+            el.classList.remove('gallery-item-1');
+            el.classList.remove('gallery-item-2');
+            el.classList.remove('gallery-item-3');
+            el.classList.remove('gallery-item-4');
+            el.classList.remove('gallery-item-5');
+        })
+
+        this.carouselArray.slice(0,5).forEach((el,index) => {
+            el.classList.add(`gallery-item-${index+1}`);
+        })
+    }
+
+    setCurrentState(direction: any){
+        if(direction.className == 'gallery-controls-previous'){
+            this.carouselArray.unshift(this.carouselArray.pop()!);
+        } else{
+            this.carouselArray.push(this.carouselArray.shift()!);
+        }
+        this.updateGallery();
+    }
+
+    setControls(){
+        this.carouselControls.forEach((control: any) => {
+            if(galleryControlsContainer){
+                galleryControlsContainer.appendChild(document.createElement('button')).className = `gallery-controls-${control}`;
+                let ctrlElem:HTMLElement | null = document.querySelector(`.gallery-controls-${control}`);
+                if(ctrlElem){
+                    ctrlElem.innerText = control;
+                }
+            }  
+        })
+    }
+
+    useControls(){
+        if(galleryControlsContainer){
+            const triggers: Array<ChildNode> | null = [...galleryControlsContainer.childNodes];
+                triggers?.forEach(control => {
+                    control.addEventListener('click', e => {
+                        e.preventDefault();
+                        this.setCurrentState(control);
+                    })
+                })
+        }
+        
+    }
+}
+onMounted(() => {
+
+    galleryContainer = document.querySelector('.gallery-container');
+    galleryControlsContainer = document.querySelector('.gallery-controls');
+    galleryItems = document.querySelectorAll('.gallery-item');
+
+    if(galleryContainer && galleryItems){
+        galaxyCarousel = new Carousel(galleryContainer,galleryItems,galleryControls);
+        galaxyCarousel.setControls();
+        galaxyCarousel.useControls();
+    }
+})
+
 </script>
 
 <template>
@@ -87,7 +158,12 @@ class Carousel{
         opacity:.4;
         transform: translateX(-50%);
     }
-    .gallery-controls{
+    
+   
+
+</style>
+<style>
+.gallery-controls{
         display:flex;
         justify-content:center;
         margin: 25px 0;
@@ -101,11 +177,12 @@ class Carousel{
         margin: 0 50px;
         padding: 0 12px;
         text-transform: capitalize;
+        color: white;
     }
     .gallery-controls button:focus{
         outline:none;
     }
-    .gallery-controls-previous{
+ .gallery-controls-previous{
         position:relative;
     }
     .gallery-controls-previous::before{
@@ -125,11 +202,12 @@ class Carousel{
     .gallery-controls-previous:hover::before{
         left: -40px;
     }
-    .gallery-controls--next{
+    .gallery-controls-next{
         position:relative;
+        background: transparent;
     }
-    .gallery-controls--next::before{
-        border: solid #000;
+    .gallery-controls-next::before{
+        border: solid #fff;
         border-width: 0 5px 5px 0;
         content: '';
         display: inline-block;
@@ -137,7 +215,7 @@ class Carousel{
         padding: 10px;
         position: absolute;
         right: -30px;
-        top: 45;
+        top: 45%;
         transform: rotate(-45deg) translateY(-50%);
         transition: right .15s ease-in-out;
         width: 5px;
@@ -166,5 +244,4 @@ class Carousel{
     .gallery-nav li.gallery-item-selected{
         background:#555;
     }
-
 </style>
