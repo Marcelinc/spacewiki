@@ -189,6 +189,25 @@ onMounted(() => {
         opacity:.4;
         transform: translateX(-50%);
     }
+
+    /**Media queries */
+    @media screen and (max-width:1040px){
+        .gallery-item-1,.gallery-item-5{
+          opacity: 0; 
+        }
+    }
+    @media screen and (max-width:640px){
+        .gallery-item-2,.gallery-item-4{
+          opacity: 0; 
+        }
+    }
+    @media screen and (max-width:490px){
+        .gallery-item-3{
+          width: 80vw;
+          object-fit:cover
+        }
+    }
+
 </style>
 <style>
 .gallery-controls{
@@ -271,5 +290,13 @@ onMounted(() => {
 
     .gallery-nav li.gallery-item-selected{
         background:#555;
+    }
+
+    /**Media queries */
+    @media screen and (max-width:490px){
+        .gallery-controls button{
+            margin: 0 20px;
+            font-size: 1.5em;
+        }
     }
 </style>
