@@ -1,46 +1,68 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import FullScreenImg from '../components/FullScreenImg.vue';
 
-/*type imageType = {
-    id: number,
-    path: string,
-}
 
-const images = [];
-*/
+const showFullScreenImg = ref(false);
+const fullScreenImgContent = ref({objectName: 'Galaxy',imgUrl: '#'});
+
+
 var galleryContainer: HTMLElement | null;
 var galleryControlsContainer: HTMLElement | null;
 const galleryControls: Array<String> = ['previous', 'next'];
-var galleryItems: NodeListOf<HTMLElement> | null;
+var galleryItems: NodeListOf<HTMLImageElement> | null;
 var galaxyCarousel: Carousel;
 
 class Carousel{
 
     carouselContainer: HTMLElement;
     carouselControls: Array<String>;
-    carouselArray: Array<HTMLElement>;
+    carouselArray: Array<HTMLImageElement>;
 
-    constructor(container: HTMLElement,items: NodeListOf<HTMLElement>,controls: Array<String>){
+    constructor(container: HTMLElement,items: NodeListOf<HTMLImageElement>,controls: Array<String>){
         this.carouselContainer = container;
         this.carouselControls = controls;
         this.carouselArray = [...items];
     }
 
+    setFullScreenImage(imgPath:string){
+        fullScreenImgContent.value.imgUrl = imgPath
+    }
+
+    displayFullScreenImg(){
+        showFullScreenImg.value = true;
+    }
+
+    setFullScreenImageControl(){
+        this.setFullScreenImage(this.carouselArray[2].src);
+        this.carouselArray[2].addEventListener('click',this.displayFullScreenImg)
+    }
+
+    //Update classes of updated node elements
     updateGallery(){
-        this.carouselArray.forEach(el => {
+        this.carouselArray.forEach((el,index) => {
             el.classList.remove('gallery-item-1');
             el.classList.remove('gallery-item-2');
             el.classList.remove('gallery-item-3');
             el.classList.remove('gallery-item-4');
             el.classList.remove('gallery-item-5');
+            if(index === 2)
+                this.setFullScreenImage(el.src);
         })
 
         this.carouselArray.slice(0,5).forEach((el,index) => {
             el.classList.add(`gallery-item-${index+1}`);
+            //add event listener to show image
+            if(index === 2){
+                el.addEventListener('click',this.displayFullScreenImg)
+            } else
+                el.removeEventListener('click',this.displayFullScreenImg);
         })
     }
 
+    //Move node elements in the array to change order of the carousel items
     setCurrentState(direction: any){
+        console.log('mounted')
         if(direction.className == 'gallery-controls-previous'){
             this.carouselArray.unshift(this.carouselArray.pop()!);
         } else{
@@ -49,6 +71,7 @@ class Carousel{
         this.updateGallery();
     }
 
+    //Add buttons to the carousel
     setControls(){
         this.carouselControls.forEach((control: any) => {
             if(galleryControlsContainer){
@@ -61,6 +84,7 @@ class Carousel{
         })
     }
 
+    //Set onclick listeners to buttons
     useControls(){
         if(galleryControlsContainer){
             const triggers: Array<ChildNode> | null = [...galleryControlsContainer.childNodes];
@@ -84,6 +108,7 @@ onMounted(() => {
         galaxyCarousel = new Carousel(galleryContainer,galleryItems,galleryControls);
         galaxyCarousel.setControls();
         galaxyCarousel.useControls();
+        galaxyCarousel.setFullScreenImageControl();
     }
 })
 
@@ -98,14 +123,17 @@ onMounted(() => {
             <img class="gallery-item gallery-item-4" src="/images/galaxies/ngc4194.jpg" data-index="4">
             <img class="gallery-item gallery-item-5" src="/images/galaxies/cigarmessier.jpg" data-index="5">
         </div>
-        <div class="gallery-controls">
-
-        </div>
+        <div class="gallery-controls"></div>
+        <full-screen-img v-show="showFullScreenImg" :object-name="fullScreenImgContent.objectName"
+        :img-url="fullScreenImgContent.imgUrl" @close-image="() => showFullScreenImg=false"></full-screen-img>
     </div>
 </template>
 
 
 <style scoped>
+    .gallery{
+        position: relative;
+    }
     .gallery-container{
         display: flex;
         align-items: center;
@@ -149,6 +177,9 @@ onMounted(() => {
         transform: translateX(-50%);
         box-shadow: -2px 5px 33px 6px rgba(59, 59, 59, 0.35);
     }
+    .gallery-item-3:hover{
+        cursor: pointer;
+    }
     .gallery-item-4{
         left:70%;
         transform: translateX(-50%);
@@ -158,9 +189,6 @@ onMounted(() => {
         opacity:.4;
         transform: translateX(-50%);
     }
-    
-   
-
 </style>
 <style>
 .gallery-controls{
