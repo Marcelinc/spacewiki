@@ -64,6 +64,7 @@ const GalaxyTypes = [{
                     <h1>Welcome to the Galaxy Explorer</h1>
                     <span>Embark on a cosmic journey with us as we delve into the fascinating world of galaxies</span>
                     <div class="about-content right">
+                    <img id="galaxyIcon" src="/images/galaxy.svg"/>
                         <span>
                             <h3>What are galaxies?</h3>
                             Galaxies are colossal systems of stars, interstellar gas, dust, and dark matter bound together by gravity. Our universe is teeming with these celestial giants, each telling a unique story of cosmic evolution.
@@ -74,6 +75,7 @@ const GalaxyTypes = [{
                             <h3>Explore the Cosmos</h3>
                             Discover the diverse array of galaxies that populate our vast universe. From spiral galaxies like the Milky Way to elliptical galaxies with their graceful shapes, each holds its own secrets waiting to be unraveled. Learn about the various classifications, sizes, and distinctive features that make each galaxy a celestial masterpiece.
                         </span>
+                        <img src="/images/blackHole.svg" style="width: 200px"/>
                     </div>
                 </div>
             </section>
@@ -140,12 +142,7 @@ figure img{
 .about-content{
     margin: 60px 40px;
     display: flex;
-}
-.about-content.left{
-    justify-content: left;
-}
-.about-content.right{
-    justify-content: right;
+    justify-content: space-around;
 }
 .about-content span{
     width: 40%;
@@ -178,6 +175,14 @@ figure img{
     padding: 2em;
 }
 
+#galaxyIcon{
+    width: 200px;
+    rotate: x 30deg;
+    /*animation: rotateGalaxy 10s linear infinite;
+    box-shadow: 0px 4px 2px -2px #00ffff;
+    perspective: 300px;*/
+}
+
 
 /**Media queries */
 @media screen and (max-width:980px){
@@ -188,4 +193,11 @@ figure img{
         width: 60%;
     }
 }
+
+/*Animations*/
+/*@keyframes rotateGalaxy{
+    100%{
+        transform: rotat(360deg);
+    }
+}*/
 </style>
