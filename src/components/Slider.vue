@@ -193,12 +193,12 @@ onMounted(() => {
     /**Media queries */
     @media screen and (max-width:1040px){
         .gallery-item-1,.gallery-item-5{
-          opacity: 0; 
+          display: none;
         }
     }
     @media screen and (max-width:640px){
         .gallery-item-2,.gallery-item-4{
-          opacity: 0; 
+          display: none;
         }
     }
     @media screen and (max-width:490px){

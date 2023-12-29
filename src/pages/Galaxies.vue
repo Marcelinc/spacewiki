@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Navbar from '../components/Navbar.vue';
 import Slider from '../components/Slider.vue';
+import MyFooter from '../components/MyFooter.vue';
 
 const GalaxyTypes = [{
     id:1,
@@ -64,7 +65,7 @@ const GalaxyTypes = [{
                     <h1>Welcome to the Galaxy Explorer</h1>
                     <span>Embark on a cosmic journey with us as we delve into the fascinating world of galaxies</span>
                     <div class="about-content right">
-                    <img id="galaxyIcon" src="/images/galaxy.svg"/>
+                        <img id="galaxyIcon" src="/images/galaxy.svg"/>
                         <span>
                             <h3>What are galaxies?</h3>
                             Galaxies are colossal systems of stars, interstellar gas, dust, and dark matter bound together by gravity. Our universe is teeming with these celestial giants, each telling a unique story of cosmic evolution.
@@ -84,8 +85,8 @@ const GalaxyTypes = [{
             <section id="types">
                 <div id="types-content">
                     <h1>Types of galaxies</h1>
-                    <div>
-                        <span>
+                    <div id="types-span-container">
+                        <span id="types-span">
                             Galaxies, the building blocks of our vast universe, come in a variety of shapes and sizes. Each type of galaxy offers a unique glimpse into the cosmic tapestry. Let's embark on a journey through the different classifications of galaxies
                         </span>
                     </div>
@@ -112,6 +113,7 @@ const GalaxyTypes = [{
                 </div>
             </section>
         </main>
+        <my-footer></my-footer>
     </div>
 </template>
 
@@ -158,6 +160,7 @@ figure img{
     margin: auto;
     max-width: 1100px;
 }
+
 .type-content{
     display: flex;
     justify-content: center;
@@ -170,6 +173,7 @@ figure img{
 }
 .type-description{
     max-width: 900px;
+    margin-inline: 10px;
 }
 #observations{
     padding: 2em;
@@ -191,6 +195,13 @@ figure img{
     }
     .about-content span{
         width: 60%;
+    }
+}
+
+@media screen and (max-width: 660px){
+    .about-content{
+        flex-direction: column;
+        align-items: center;
     }
 }
 
