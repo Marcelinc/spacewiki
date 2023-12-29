@@ -2,6 +2,7 @@
 import Navbar from '../components/Navbar.vue';
 import Loading from '../components/Loading.vue';
 import Error from '../components/Error.vue';
+import MyFooter from '../components/MyFooter.vue';
 import { ref, Transition } from 'vue';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid';
 
@@ -16,9 +17,9 @@ var loading = ref(true);
 var error= ref(false);
 var objects = ref<CelestialType[]>([]);
 
-const showOrbClearance = ref(false);
-const showSize = ref(false);
-const showShape = ref(false);
+const showOrbClearance = ref(true);
+const showSize = ref(true);
+const showShape = ref(true);
 
 fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star&filter[]=bodyType,eq,Planet&filter[]=bodyType,eq,Dwarf Planet&satisfy=true&satisfy=any&order=aphelion,asc&data=id,name,englishName,bodyType',{
     headers: {
@@ -130,6 +131,7 @@ fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star
                 <h2>Asteroid belts</h2>
             </section>-->
         </main>
+        <my-footer></my-footer>
     </div>
 </template>
 

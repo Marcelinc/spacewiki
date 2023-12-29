@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router';
 import Navbar from '../components/Navbar.vue';
 import Loading from '../components/Loading.vue';
+import MyFooter from '../components/MyFooter.vue';
 import { ref } from 'vue';
 
 type ObjectType = {
@@ -72,6 +73,7 @@ fetch(`https://api.le-systeme-solaire.net/rest/bodies/${id}`,{
                 
             </div>
         </main>
+        <my-footer></my-footer>
     </div>
 </template>
 
@@ -85,6 +87,7 @@ main{
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 4em;
+    margin-bottom: 3em;
 }
 #obj-image-container{
     border: 1px solid rgb(61, 49, 49);
