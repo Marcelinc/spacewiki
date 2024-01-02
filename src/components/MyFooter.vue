@@ -18,7 +18,7 @@
                 <h3 class="footer-column-header">See also</h3>
                 <ul class="footer-column-links">
                     <li><a href="https://planets-3d.netlify.app/" target="_blank">Planets 3D</a></li>
-                    <li><a href="#">Databank</a></li>
+                    <li><a href="/databank">Databank</a></li>
                     <li><a href="https://www.esa.int/" target="_blank">ESA</a></li>
                 </ul>
             </div>

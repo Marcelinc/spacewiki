@@ -18,8 +18,8 @@ const handleHamburgerClick = () => {
         </div>
         <Transition>
             <div id="content-part" v-show="opened">
-                <a href="#">Databank</a>
-                <a href="#">OpenData API</a>
+                <a href="/databank">Databank</a>
+                <a href="https://api.le-systeme-solaire.net/en/">OpenData API</a>
                 <a href="https://planets-3d.netlify.app/" target="_blank">Space3D</a>
             </div>
         </Transition>
