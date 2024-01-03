@@ -32,6 +32,7 @@ footer{
     margin: auto;
     max-width: 1100px;
     padding: 2em 10px;
+    height: 280px;
 }
 #footer-line{
     height: 1px;

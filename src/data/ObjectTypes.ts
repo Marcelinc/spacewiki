@@ -1,11 +1,13 @@
 const ObjectTypes = [{
     id:1,
     typeName: "Planets",
-    value: 'planet'
+    value: 'planet',
+    iconPath: '/images/planetIcon.png',
 },{
     id:2,
     typeName: "Stars",
-    value: 'star'
+    value: 'star',
+    iconPath: '/images/sunIcon.png',
 },{
     id:3,
     typeName: "Galaxies",
@@ -17,7 +19,8 @@ const ObjectTypes = [{
 },{
     id:5,
     typeName: "Asteroids",
-    value: 'asteroid'
+    value: 'asteroid',
+    iconPath: '/images/meteorideIcon.png',
 }]
 
 export default ObjectTypes
