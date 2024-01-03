@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import HamburgerButton from './HamburgerButton.vue';
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -8,7 +9,7 @@ import HamburgerButton from './HamburgerButton.vue';
             <a href="/">SpaceWiki</a>
         </div>
         <div id="links-container">
-            <a href="/databank">Databank</a>
+            <router-link to="/databank">Databank</router-link>
             <a href="https://api.le-systeme-solaire.net/en/" target="_blank">OpenData API</a>
             <a href="https://planets-3d.netlify.app/" target="_blank">Space3D</a>
         </div>
