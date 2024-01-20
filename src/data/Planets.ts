@@ -1,39 +1,39 @@
 type PlanetType = {
-    id: number,
+    id: number | string,
     name: string,
     imagePath: string
 }
 
 const Planets: Array<PlanetType> = new Array({
-    id: 1,
+    id: 'terre',
     name: "Earth",
     imagePath: "/images/earth.png"
 },{
-    id: 2,
+    id: 'mars',
     name: "Mars",
     imagePath: "/images/mars.png"
 },{
-    id: 3,
+    id: 'venus',
     name: "Venus",
     imagePath: "/images/venus.png"
 },{
-    id: 4,
+    id: 'jupiter',
     name: "Jupiter",
     imagePath: "/images/jupiter.png"
 },{
-    id: 5,
+    id: 'saturne',
     name: "Saturn",
     imagePath: "/images/saturn.png"
 },{
-    id: 6,
+    id: 'neptune',
     name: "Neptune",
     imagePath: "/images/neptune.png"
 },{
-    id: 7,
+    id: 'mercure',
     name: "Mercury",
     imagePath: "/images/mercury.png"
 },{
-    id: 8,
+    id: 'uranus',
     name: "Uranus",
     imagePath:"/images/uranus.png"
 })

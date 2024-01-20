@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const opened = ref(false);
 
@@ -18,7 +19,7 @@ const handleHamburgerClick = () => {
         </div>
         <Transition>
             <div id="content-part" v-show="opened">
-                <a href="/databank">Databank</a>
+                <router-link to="/databank">Databank</router-link>
                 <a href="https://api.le-systeme-solaire.net/en/">OpenData API</a>
                 <a href="https://planets-3d.netlify.app/" target="_blank">Space3D</a>
             </div>

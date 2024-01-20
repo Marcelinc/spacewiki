@@ -2,20 +2,30 @@
 import Navbar from '../components/Navbar.vue';
 import MyFooter from '../components/MyFooter.vue';
 import ObjectTile from '../components/ObjectTile.vue';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 import ObjectTypes from '../data/ObjectTypes';
 import {Planets,PlanetType} from '../data/Planets';
 import {Galaxies,GalaxyType} from '../data/Galaxies';
+import { useRouter } from 'vue-router';
 
 const data = ref<Array<PlanetType | GalaxyType> | [] >([]);
-const chosenType = ref('');
 const dataMessage = ref('Search objects');
 const errorMessage = ref('');
-const searched = ref(false);
+const fetchingData = ref(false);
+
+//query params
+const router = useRouter();
+const query = router.currentRoute.value.query;
+const chosenType = ref(query.objectType ? query.objectType : '');
+//update query param after select object type
+watch(chosenType, () => {
+    router.replace({query: {objectType: chosenType.value}})
+})
 
 //Set fetched objects to defined array
-const onSubmitForm = () => {
+const fetchData = () => {
+    fetchingData.value = true;
     let response: Array<PlanetType | GalaxyType> | [] = [];
     errorMessage.value = '';
     console.log(chosenType.value)
@@ -45,8 +55,16 @@ const onSubmitForm = () => {
     else{
         errorMessage.value = 'Select object type'
     }
-    searched.value = true;
+    //delay
+    setTimeout(() => {
+        fetchingData.value = false;
+    },1000)
+    
 }
+
+//after first rendering
+if(chosenType.value)
+    fetchData();
 </script>
 
 <template>
@@ -55,7 +73,7 @@ const onSubmitForm = () => {
         <main>
             <h1>Search any type of object in our databank</h1>
             <section id="categories-form-container">
-                <form id="categories-form" @submit.prevent="onSubmitForm">
+                <form id="categories-form" @submit.prevent="fetchData">
                     <select name="types" v-model="chosenType" id="select-types">
                         <option disabled value="">Select type</option>
                         <option v-for="obj in ObjectTypes" :value="obj.value" :key="obj.id">
@@ -70,11 +88,12 @@ const onSubmitForm = () => {
                 </label>-->
             </section>
             <section id="results">
-                <div id="object-tile-container">
+                <div v-show="!fetchingData" id="object-tile-container">
                     <object-tile v-for="x in data" :object-id="x.id" :object-name="x.name" :object-image="x.imagePath"></object-tile>
                 </div> 
-                <p v-show="!errorMessage" class="message">{{ dataMessage }}</p>
-                <p v-show="errorMessage" class="message error">{{ errorMessage }}</p>
+                <p v-show="!errorMessage && !fetchingData" class="message">{{ dataMessage }}</p>
+                <p v-show="errorMessage && !fetchingData" class="message error">{{ errorMessage }}</p>
+                <p v-show="fetchingData" class="message">Loading data...</p>
             </section>
         </main>
         <my-footer></my-footer>
