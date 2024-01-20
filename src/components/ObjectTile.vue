@@ -1,24 +1,30 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 const props = defineProps({
     objectName: {
         type: String,
-        required: true
-    },
-    objectId: {
-        type: Number,
         required: true
     },
     objectImage: {
         type: String,
         required: true
     },
+    objectId:{
+        type: [String,Number],
+    }
 })
+
+const redirect = () => {
+    router.push(`/databank/${props.objectId}`); console.log('clicked')
+}
 
 </script>
 
 <template>
-    <div class="object-tile">
-        <img :src="props.objectImage" :alt="$props.objectName"/>
+    <div class="object-tile" @click="redirect">
+        <img :src="props.objectImage" :alt="$props.objectName" loading="lazy"/>
         <p class="object-name">{{ props.objectName }}</p>
     </div>
 </template>
@@ -37,6 +43,9 @@ const props = defineProps({
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.object-tile:hover{
+    cursor: pointer;
 }
 .object-name{
     position: absolute;

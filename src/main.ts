@@ -8,6 +8,7 @@ import SolarSystem from './pages/SolarSystem.vue'
 import Galaxies from './pages/Galaxies.vue'
 import ObjectPage from './pages/ObjectPage.vue'
 import Databank from './pages/Databank.vue'
+import NotFoundVue from './pages/NotFound.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -16,7 +17,9 @@ const router = createRouter({
         { path: '/solar-system', component: SolarSystem},
         { path: '/solar-system/:id', name:'solarsys.object', component: ObjectPage},
         { path: '/galaxies', component: Galaxies},
-        { path: '/databank', component: Databank}
+        { path: '/databank', component: Databank},
+        { path: '/databank/:id', component: ObjectPage},
+        { path: '/:pathMatch(.*)*', component: NotFoundVue}
     ]
 });
 
