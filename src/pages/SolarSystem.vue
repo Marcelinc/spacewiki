@@ -58,7 +58,7 @@ fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star
             
             <p class="solar-desc">
                 Planetary system that centers around the 
-                <router-link to="/solar-system/soleil" id="sun">Sun</router-link>.
+                <router-link to="/databank/star/soleil" id="sun">Sun</router-link>.
             </p>
             <p class="solar-desc">It consists of eight planets, their moons, dwarf planets, asteroids, comets and other celestial bodies</p>
             <img src="/images/solarSystem.gif" id="solarGif"/>
@@ -67,7 +67,7 @@ fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star
                 <h2>Planets</h2>
                 <div class="planet-container">
                     <div class="planet" v-for="obj in objects" :key="obj.name">
-                        <router-link :to="'/solar-system/'+obj.id" v-if="obj.bodyType === 'Planet'">
+                        <router-link :to="'/databank/planet/'+obj.id" v-if="obj.bodyType === 'Planet'">
                             <img :src="'/images/'+obj.englishName.toLowerCase()+'.png'" :alt="obj.englishName"/>
                             <span class="obj-name">{{ obj.englishName }}</span>
                         </router-link>
@@ -119,7 +119,7 @@ fetch('https://api.le-systeme-solaire.net/rest/bodies/?filter[]=bodyType,eq,Star
                 </p>
                 <div class="planet-container">
                     <div class="planet" v-for="obj in objects" :key="obj.name">
-                        <router-link :to="'/solar-system/'+obj.id" v-if="obj.bodyType === 'Dwarf Planet'">
+                        <router-link :to="'/databank/planet/'+obj.id" v-if="obj.bodyType === 'Dwarf Planet'">
                             <img :src="'/images/'+obj.englishName.toLowerCase()+'.png'" :alt="obj.englishName"/>
                             <span class="obj-name">{{ obj.englishName }}</span>
                         </router-link>

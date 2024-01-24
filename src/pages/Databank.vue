@@ -89,7 +89,7 @@ if(chosenType.value)
             </section>
             <section id="results">
                 <div v-show="!fetchingData" id="object-tile-container">
-                    <object-tile v-for="x in data" :object-id="x.id" :object-name="x.name" :object-image="x.imagePath"></object-tile>
+                    <object-tile v-for="x in data" :object-id="x.id" :object-name="x.name" :object-image="x.imagePath" :object-type="chosenType.toString()"></object-tile>
                 </div> 
                 <p v-show="!errorMessage && !fetchingData" class="message">{{ dataMessage }}</p>
                 <p v-show="errorMessage && !fetchingData" class="message error">{{ errorMessage }}</p>

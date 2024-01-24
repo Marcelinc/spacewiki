@@ -5,7 +5,7 @@ import Loading from '../components/Loading.vue';
 import MyFooter from '../components/MyFooter.vue';
 import { ref } from 'vue';
 
-type ObjectType = {
+type PlanetType = {
     id: string,
     name: string,
     englishName: string,
@@ -27,7 +27,7 @@ const id = route.params.id;
 
 const loading = ref(true);
 const error = ref(false);
-const object = ref<ObjectType|null>(null)
+const object = ref<PlanetType|null>(null)
 
 fetch(`https://api.le-systeme-solaire.net/rest/bodies/${id}`,{
     headers: {
