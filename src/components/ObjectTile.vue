@@ -13,12 +13,21 @@ const props = defineProps({
     },
     objectId:{
         type: [String,Number],
+        required: true
+    },
+    objectType: {
+        type: String,
+        required: true
     }
 })
 
 const redirect = () => {
-    router.push(`/databank/${props.objectId}`); console.log('clicked')
+    router.push(`/databank/${props.objectType}/${props.objectId}`); 
+    console.log('clicked');
+    console.log('prop',props.objectType);
 }
+
+
 
 </script>
 
